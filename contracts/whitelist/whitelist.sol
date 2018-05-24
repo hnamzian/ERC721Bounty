@@ -8,28 +8,28 @@ contract Whitelist is Migrations {
         bool blocked;
     }
 
-    mapping(address => reward) whitelistRewarded;
+    mapping(address => reward) whitelistReward;
 
     function addToWhitelist(address _wAddress, bool _transferable) public restricted {
         require(_wAddress != address(0));
-        reward storage newReward = whitelistRewarded[_wAddress];
+        reward storage newReward = whitelistReward[_wAddress];
         newReward.transferable = _transferable;
         newReward.blocked = false;
     }
 
     function blockFromWhitelist(address _wAddress) public restricted {
         require(_wAddress != address(0));
-        whitelistRewarded[_wAddress].blocked = true;
+        whitelistReward[_wAddress].blocked = true;
     }
 
     function unblockFromWhitelist(address _wAddress) public restricted {
         require(_wAddress != address(0));
-        whitelistRewarded[_wAddress].blocked = false;
+        whitelistReward[_wAddress].blocked = false;
     }
 
     function setTransferable(address _wAddress, bool _transferable) public restricted {
         require(_wAddress != address(0));
-        whitelistRewarded[_wAddress].transferable = _transferable;
+        whitelistReward[_wAddress].transferable = _transferable;
     }
 
 }
